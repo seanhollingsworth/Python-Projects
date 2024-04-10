@@ -1,0 +1,89 @@
+employees = []
+
+def Add_Employee():
+
+    Employee = []
+    print('Enter name of employee:', end='')
+    Employee.append(input())
+    print('Enter employee SSN:', end ='')
+    Employee.append(input())
+    print('Enter employee phone number:', end='')
+    Employee.append(input())
+    print('Enter employee email:', end='')
+    Employee.append(input())
+    print('Enter employee salary:', end='')
+    Employee.append(input())
+    employees.append(Employee)
+
+def view_all_Employees():
+    for i in employees:
+        
+        print('Name:', i[0])
+        print('SSN:', i[1])
+        print('Phone:', i[2])
+        print('Email:', i[3])
+        print('Salary:', i[4],'\n')
+        
+
+def search_SSN(ssn):
+
+    person = ''
+    for i in employees:
+        if i[1] == ssn:
+            person = i
+            break
+    print('Employee name:', person[0])
+    print('SSN:', person[1])
+    print('Phone:', person[2])
+    print('Email:', person[3])
+    print('Salary:', person[4])
+
+    return person
+
+def edit(person):
+    name = str(input('Enter new Name: '))
+    phone = str(input('Enter new phone number: '))
+    email = str(input('Enter new email: '))
+    salary = str(input('Enter new salary: '))
+
+    for i in range(len(employees)):
+        if person[1] == employees[i][1]:
+            employees[i][0] = name
+            employees[i][2] = phone
+            employees[i][3] = email
+            employees[i][4] = salary
+
+while(True):
+    print('Employee Management System:\n ')
+    if (len(employees) > 1):
+      print(f'There are {len(employees)} employees in the system.\n')
+    else:
+      print(f'There is {len(employees)} employee in the system.\n')
+
+    print('Enter 0 to exit: ')
+    print('Enter 1 to add employee: ') 
+    print('Enter 2 to view all employees: ')
+    print('Enter 3 to get employee by Social: ')
+    print('Enter 4 to edit employee by SSN: ')
+
+
+    a=int(input())
+    if(a==0):
+        break
+    elif(a==1):
+        Add_Employee()
+    elif(a==2):
+        view_all_Employees()
+    elif(a==3):
+        ssn = str(input('Enter Social Security: '))        
+        search_SSN(ssn)
+    elif(a==4):
+        ssn = str(input('Enter Social Security: '))
+        edit_person = search_SSN(ssn)
+        edit(edit_person)
+        search_SSN(ssn)
+
+    else:
+        print('Invalid output')
+
+
