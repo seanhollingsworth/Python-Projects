@@ -1,0 +1,92 @@
+import random
+
+#Step 4
+
+stages = ['''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
+
+word_list = ["advark", "baboon", "camel"]
+chosen_word = random.choice(word_list)
+display = []
+lives = 6
+char = ''
+game_over =  False
+print(f'Rand word is {chosen_word}')
+for letter in chosen_word:
+  display.append('_')
+
+while not game_over:
+  # if '_' in display:
+  guess = input('Guess a letter: ').lower()
+  for position_of_char in range(len(chosen_word)):
+    char = chosen_word[position_of_char]
+    if chosen_word[position_of_char] == guess:
+      display[position_of_char] = guess
+      print(f"{' '.join(display)}")
+
+  if guess not in chosen_word:
+    lives -= 1
+    print(stages[lives])
+  
+  if lives == 0:
+    print("Game Over")
+    game_over = True
+
+  elif "_" not in display:
+    print("You win.")
+    game_over = True
+ 
