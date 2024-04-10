@@ -1,0 +1,45 @@
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+if direction != 'encode' or direction != 'decode' :
+  print("Your entry is not valid type 'Type 'encode' to encrypt, type 'decode' to decrypt:'")
+
+
+text = input("Type your message:\n").lower()
+shift = int(input("Type the shift number:\n"))
+
+#TODO-1: Create a function called 'encrypt' that takes the 'text' and 'shift' as inputs.
+def encrypt (plain_text, shift_amount):
+   cypher_list = []
+  
+   joined_cypher = ''
+   
+   for char in text:
+    index = alphabet.index(char)
+    cypher_start = index + shift_amount
+   
+   if cypher_start > 25:
+     cypher_start -= 26
+     cypher_list.append(alphabet[cypher_start])
+     joined_cypher = ''.join(cypher_list)
+   else:
+      cypher_list.append(alphabet[cypher_start])
+      joined_cypher = ''.join(cypher_list)
+   print(f"The encoded text is {joined_cypher}")
+
+def decrypt(joined_cypher, shift_amount):
+  decypher_list = []
+  joined_decypher = ''
+  
+  for char in joined_cypher:
+    index = alphabet.index(char)
+    decypher =  index - shift_amount
+    decypher_list.append(alphabet[decypher])
+    joined_decypher = ''.join(decypher_list)
+  print(f"The decoded text is {joined_decypher}")
+
+if direction == 'encode':
+  encrypt(text,shift)
+elif direction == 'decode':
+  decrypt(text, shift)
+
