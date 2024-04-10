@@ -8,7 +8,7 @@ class Budget:
     self.department = department
     self.actual = actual
 
-with open("expenditures.csv") as file:
+with open("expenditures.txt") as file:
   reader = csv.reader(file, delimiter = ",")
   info_list = []
   row_number = 1
