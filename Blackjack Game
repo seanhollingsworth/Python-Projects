@@ -1,0 +1,73 @@
+
+
+import random
+from art import logo
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+dealer_cards = []
+player_cards = []
+
+
+def deal_card():
+  print(logo)
+  rand_card = random.choice(cards)
+  return rand_card
+
+def calculate_score(cards):
+  if sum(cards) == 21 and len(cards) == 2:
+    return 0
+  if 11 in cards and len(cards) >= 2:
+    cards.remove(11)
+    cards.append(1)
+  return sum(cards)
+
+for _ in range(2):
+  player_cards.append(deal_card())
+  dealer_cards.append(deal_card()) 
+  
+
+player_turn = True
+
+while player_turn:
+  players_score = calculate_score(player_cards)
+ 
+  print(f" Your cards: {player_cards}, current score: {players_score}")
+  print(f"Dealer's first card: {dealer_cards[0]}")
+  if players_score == 0 or players_score > 21 or players_score == 21:
+    player_turn = False
+  elif players_score < 21:
+    game_status = input(f"Your score is {players_score} would you like to hit or stay?: ")
+    if game_status == 'hit':
+      player_cards.append(deal_card())
+      players_score = calculate_score(player_cards)
+    else:
+      player_turn = False
+
+dealer_turn = True
+
+while dealer_turn:
+  dealers_score = calculate_score(dealer_cards)
+  if dealers_score > 1 and dealers_score < 17:
+    dealer_cards.append(deal_card())
+    dealers_score = calculate_score(dealer_cards)
+  else:
+   dealer_turn = False
+
+def compare(players_score, dealers_score):
+  if players_score == dealers_score:
+    return "Game ends in draw"
+  elif dealers_score == 0 or dealers_score == 21:
+    return "Dealer has BlackJack!"
+  elif players_score == 0 or dealers_score == 21:
+    return "Player has BlackJack!"
+  elif dealers_score > 21:
+    return "Dealer loses!"
+  elif players_score > 21:
+    return "Player Loses!"
+  if players_score > dealers_score and players_score < 21:
+    return "Player Wins!"
+  elif dealers_score > players_score and dealers_score < 21:
+    return "Dealer Wins!"
+
+print(compare(players_score, dealers_score))
+print(f"The players score was {players_score} and the dealers score was {dealers_score}"
